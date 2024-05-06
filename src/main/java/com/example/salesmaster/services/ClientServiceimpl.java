@@ -4,18 +4,14 @@ import com.example.salesmaster.entities.Client;
 import com.example.salesmaster.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class ClientServiceimpl implements ClientService{
 
-    private ClientRepository clientRepository;
-
     @Autowired
-    public ClientServiceimpl(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
-
+    private ClientRepository clientRepository;
     @Override
     public Client saveClient(Client client) {
         return clientRepository.save(client);
