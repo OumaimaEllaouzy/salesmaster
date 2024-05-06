@@ -40,4 +40,9 @@ public class ClientServiceimpl implements ClientService{
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
+
+    @Override
+    public List<Client> getAllClient() {
+        return clientRepository.findAll();
+    }
 }

@@ -1,3 +1,5 @@
+package com.example.salesmaster.services;
+
 import com.example.salesmaster.entities.Client;
 import com.example.salesmaster.entities.Produit;
 import com.example.salesmaster.repositories.ClientRepository;

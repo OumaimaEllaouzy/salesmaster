@@ -16,5 +16,5 @@ import java.util.List;
 
         LigneDeVente getLigneDeVenteById(Long id);
         List<LigneDeVente> getAllLignesDeVente();
-    }
+
 }

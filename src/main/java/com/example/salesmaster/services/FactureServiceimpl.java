@@ -1,3 +1,5 @@
+package com.example.salesmaster.services;
+
 import com.example.salesmaster.entities.Facture;
 import com.example.salesmaster.repositories.FactureRepository;
 import com.example.salesmaster.services.FactureService;
