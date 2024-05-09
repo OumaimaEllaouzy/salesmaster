@@ -9,9 +9,12 @@ import java.util.List;
 public interface FactureService{
 
     Facture saveFacture(Facture facture);
-    Facture updateFacture(Facture facture);
+    Facture updateFacture(Long id,Facture facture);
     void deleteFactureById(Long id);
     void deleteAllFactures();
     Facture getFactureById(Long id);
+
     List<Facture> getAllFactures();
+
+    List<Facture> getAllFacture();
 }

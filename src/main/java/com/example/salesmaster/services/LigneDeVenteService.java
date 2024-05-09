@@ -8,13 +8,10 @@ import java.util.List;
     public interface LigneDeVenteService {
 
         LigneDeVente saveLigneDeVente(LigneDeVente ligneDeVente);
-        LigneDeVente updateLigneDeVente(LigneDeVente ligneDeVente);
+        LigneDeVente updateLigneDeVente(Long id,LigneDeVente ligneDeVente);
         void deleteLigneDeVenteById(Long id);
-        void deleteAllLignesDeVente();
-
-        void deleteAlLignesDeVente();
+        void deleteAllLigneDeVentes();
 
         LigneDeVente getLigneDeVenteById(Long id);
-        List<LigneDeVente> getAllLignesDeVente();
-
-}
+        List<LigneDeVente> getAllLigneDeVente();
+    }

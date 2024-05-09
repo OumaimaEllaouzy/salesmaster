@@ -2,20 +2,14 @@ package com.example.salesmaster.services;
 
 import com.example.salesmaster.entities.Facture;
 import com.example.salesmaster.repositories.FactureRepository;
-import com.example.salesmaster.services.FactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class FactureServiceimpl implements FactureService {
-
-    private FactureRepository factureRepository;
-
     @Autowired
-    public FactureServiceimpl(FactureRepository factureRepository) {
-        this.factureRepository = factureRepository;
-    }
+    private FactureRepository factureRepository;
 
     @Override
     public Facture saveFacture(Facture facture) {
@@ -23,13 +17,16 @@ public class FactureServiceimpl implements FactureService {
     }
 
     @Override
-    public Facture updateFacture(Facture facture) {
-        return factureRepository.save(facture);
+    public Facture updateFacture(Long id,Facture facture) {
+        Facture factureFound = getFactureById(id);
+        return factureRepository.save(factureFound);
     }
 
     @Override
     public void deleteFactureById(Long id) {
-        factureRepository.deleteById(id);   }
+        Facture facture=getFactureById(id);
+        factureRepository.delete(facture);
+    }
 
     @Override
     public void deleteAllFactures() {
@@ -38,11 +35,19 @@ public class FactureServiceimpl implements FactureService {
 
     @Override
     public Facture getFactureById(Long id) {
-        return factureRepository.findById(id).get();
+       return factureRepository.findById(id)
+               .orElseThrow(() -> new RuntimeException("facture Does not exist !"));
+
     }
 
     @Override
     public List<Facture> getAllFactures() {
         return factureRepository.findAll();
     }
+
+    @Override
+    public List<Facture> getAllFacture() {
+        return null;
+    }
+
 }

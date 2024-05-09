@@ -53,4 +53,12 @@ public class ProduitServiceimpl implements ProduitService {
     public List<Produit> getAllProduits() {
         return produitRepository.findAll();
     }
+
+    public List<Produit> getAllProduit() {
+        return null;
+    }
+
+    public Produit updateProduit(Long produitId, Produit produit) {
+        return produit;
+    }
 }

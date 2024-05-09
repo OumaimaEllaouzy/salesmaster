@@ -1,31 +1,53 @@
 package com.example.salesmaster.Controllers;
 import com.example.salesmaster.entities.LigneDeVente;
-import com.example.salesmaster.services.LigneDeVenteService;
+import com.example.salesmaster.services.LigneDeVenteServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/ligneDeVente")
 @RestController
-@RequestMapping("/api/lignesvente")
 public class LigneDeVenteController {
     @Autowired
-    private LigneDeVenteService ligneDeVenteService;
+    private LigneDeVenteServiceimpl ligneDeVenteService;
 
-    @GetMapping("/")
-    public List<LigneDeVente> getAllLignesDeVente() {
-        return ligneDeVenteService.getAllLignesDeVente();
+
+    @GetMapping
+    public ResponseEntity<List<LigneDeVente>> getLigneDeVentes()
+    {
+        return ResponseEntity.ok(ligneDeVenteService.getAllLigneDeVente());
     }
 
     @GetMapping("/{id}")
-    public LigneDeVente getLigneDeVenteById(@PathVariable Long id) {
-        return ligneDeVenteService.getLigneDeVenteById(id);
+    public ResponseEntity<LigneDeVente> getLigneDeVente(@PathVariable("id") Long ligneDeVenteId)
+    {
+        return ResponseEntity.ok(ligneDeVenteService.getLigneDeVenteById(ligneDeVenteId));
     }
 
-    @PostMapping("/")
-    public LigneDeVente createLigneDeVente(@RequestBody LigneDeVente ligneDeVente) {
-        return ligneDeVenteService.createLigneDeVente(ligneDeVente);
+    @PostMapping
+    public ResponseEntity<LigneDeVente> createLigneDeVente(@RequestBody LigneDeVente ligneDeVente)
+    {
+        LigneDeVente ligneDeVente1 = ligneDeVenteService.saveLigneDeVente(ligneDeVente);
+        return new ResponseEntity<>(ligneDeVente1, HttpStatus.CREATED);
     }
 
-    // Autres méthodes pour mettre à jour et supprimer une ligne de vente
+    @PutMapping("/{id}")
+    public ResponseEntity<LigneDeVente> updateLigneDeVente(@PathVariable("id") Long ligneDeVenteId , @RequestBody LigneDeVente ligneDeVente)
+    {
+        LigneDeVente lignedeVente1 = ligneDeVenteService.updateLigneDeVente(ligneDeVenteId,ligneDeVente);
+        return new ResponseEntity<>(lignedeVente1, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteLigneDeVente(@PathVariable("id") Long ligneDeVenteId)
+    {
+        ligneDeVenteService.deleteLigneDeVenteById(ligneDeVenteId);
+        return ResponseEntity.ok("LigneDeVente deleted successfully !");
+    }
+
 }

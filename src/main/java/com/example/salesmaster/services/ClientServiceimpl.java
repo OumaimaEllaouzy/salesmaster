@@ -18,13 +18,16 @@ public class ClientServiceimpl implements ClientService{
     }
 
     @Override
-    public Client updateClient(Client client) {
-        return clientRepository.save(client);
+    public Client updateClient(Long id,Client client) {
+       Client clientFound = getClientById(id);
+       return clientRepository.save(clientFound);
     }
 
     @Override
     public void deleteClientById(Long id) {
-       clientRepository.deleteById(id);   }
+       Client client=getClientById(id);
+       clientRepository.delete(client);
+          }
 
     @Override
     public void deleteAllClients() {
@@ -33,16 +36,13 @@ public class ClientServiceimpl implements ClientService{
 
     @Override
     public Client getClientById(Long id) {
-        return clientRepository.findById(id).get();
-    }
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("client Does not exist !"));
 
-    @Override
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
     }
-
     @Override
     public List<Client> getAllClient() {
         return clientRepository.findAll();
     }
+
 }

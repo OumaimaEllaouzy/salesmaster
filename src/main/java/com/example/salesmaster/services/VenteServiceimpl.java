@@ -83,4 +83,12 @@ public class VenteServiceimpl implements VenteService{
     public List<VenteService> getAllVentesService() {
         return null;
     }
+
+    public Vente updateVente(Long venteId, Vente vente) {
+        return vente;
+    }
+
+    public List<Vente> getAllVente() {
+        return null;
+    }
 }

@@ -1,44 +1,53 @@
 package com.example.salesmaster.Controllers;
-
 import com.example.salesmaster.entities.Produit;
-import com.example.salesmaster.services.ProduitService;
-import lombok.AllArgsConstructor;
+import com.example.salesmaster.services.ProduitServiceimpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/produit")
 @RestController
-@AllArgsConstructor
-@RequestMapping("/api/produits")
 public class ProduitController {
+    @Autowired
+    private ProduitServiceimpl produitService;
 
-    private ProduitService produitService;
-
-    @PostMapping()
-    public String add(@RequestBody Produit produit) {
-        produitService.saveProduit(produit);
-        return "New product is added";
-    }
 
     @GetMapping
-    public List<Produit> getAllProduits() {
-        return produitService.getAllProduits();
+    public ResponseEntity<List<Produit>> getProduits()
+    {
+        return ResponseEntity.ok(produitService.getAllProduit());
     }
 
-    @GetMapping("/get/{id}")
-    public Optional<Produit> getProduitById(@PathVariable Long id) {
-        return produitService.getProduitById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Produit> getProduit(@PathVariable("id") Long produitId)
+    {
+        return ResponseEntity.ok(produitService.getProduitById(produitId));
     }
 
-    @PutMapping("/update/{id}")
-    public Produit updateProduit(@PathVariable Long id, @RequestBody Produit updatedProduit) {
-        return produitService.updateProduit(id, updatedProduit);
+    @PostMapping
+    public ResponseEntity<Produit> createProduit(@RequestBody Produit produit)
+    {
+        Produit produit1 = produitService.saveProduit(produit);
+        return new ResponseEntity<>(produit1, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteProduit(@PathVariable Long id) {
-        produitService.deleteProduitById(id);
-        return "Produit deleted successfully";
+    @PutMapping("/{id}")
+    public ResponseEntity<Produit> updateProduit(@PathVariable("id") Long produitId , @RequestBody Produit produit)
+    {
+        Produit produit1 = produitService.updateProduit(produitId,produit);
+        return new ResponseEntity<>(produit1, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduit(@PathVariable("id") Long produitId)
+    {
+        produitService.deleteProduitById(produitId);
+        return ResponseEntity.ok("Produit deleted successfully !");
+    }
+
 }

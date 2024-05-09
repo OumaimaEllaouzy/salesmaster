@@ -16,6 +16,8 @@ public interface UtilisateurService {
 
     Utilisateur getUtilisateurById(Long id);
 
+    List<Utilisateur> getAllUtilisateur();
+
     Utilisateur getUtilisateurtById(Long id);
 
     List<Utilisateur> getAllUtilisateurs();

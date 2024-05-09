@@ -1,39 +1,52 @@
 package com.example.salesmaster.Controllers;
-
-
 import com.example.salesmaster.entities.Client;
-import com.example.salesmaster.services.ClientService;
+import com.example.salesmaster.services.ClientServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/client")
 @RestController
-@RequestMapping("/api/clients")
 public class ClientController {
     @Autowired
-    private ClientService clientService;
+    private ClientServiceimpl clientService;
 
-    @PostMapping()
-    public String add(@RequestBody Client client){
-        clientService.saveClient(client);
-        return "New  added";
-    }
     @GetMapping
-    public List<Client> getAllClients(){
-        return clientService.getAllClient();
+    public ResponseEntity<List<Client>> getClients()
+    {
+        return ResponseEntity.ok(clientService.getAllClient());
     }
-    @GetMapping("/get/{id}")
-    public Client getClientById(@PathVariable Long id) {
-        return clientService.getClientById(id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Client> getClient(@PathVariable("id") Long clientId)
+    {
+        return ResponseEntity.ok(clientService.getClientById(clientId));
     }
-    @PutMapping("/update/{id}")
-    public Client update(@PathVariable Long id, @RequestBody Client updatedClient) {
-        return clientService.updateClient(id, updatedClient);
+
+    @PostMapping
+    public ResponseEntity<Client> createClient(@RequestBody Client client)
+    {
+        Client client1 = clientService.saveClient(client);
+        return new ResponseEntity<>(client1, HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        clientService.deleteClientById(id);
-        return "Client deleted successfully";
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable("id") Long clientId , @RequestBody Client client)
+    {
+        Client client1 = clientService.updateClient(clientId , client);
+        return new ResponseEntity<>(client1, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteClient(@PathVariable("id") Long clientId)
+    {
+        clientService.deleteClientById(clientId);
+        return ResponseEntity.ok("Client deleted successfully !");
+    }
+
 }

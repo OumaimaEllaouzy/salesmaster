@@ -49,6 +49,11 @@ public class UtilisateurServiceimpl implements UtilisateurService {
     }
 
     @Override
+    public List<Utilisateur> getAllUtilisateur() {
+        return null;
+    }
+
+    @Override
     public Utilisateur getUtilisateurtById(Long id) {
         return utilisateurRepository.findById(id).get();
     }
@@ -57,5 +62,9 @@ public class UtilisateurServiceimpl implements UtilisateurService {
     @Override
     public List<Utilisateur> getAllUtilisateurs() {
         return utilisateurRepository.findAll();
+    }
+
+    public Utilisateur updateUtilisateur(Long utilisateurId, Utilisateur utilisateur) {
+        return utilisateur;
     }
 }

@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date Nom;
+    private String nom;
     private String Email;
     private String Motdepasse;
     private String Role;

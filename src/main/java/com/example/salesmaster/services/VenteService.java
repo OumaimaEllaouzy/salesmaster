@@ -26,9 +26,14 @@ public interface VenteService {
     List<Vente> getAllVentes();
 
     VenteService saveVenteService(VenteService venteservice);
+
     VenteService updateVenteService(VenteService venteservice);
+
     void deleteVenteServiceById(Long id);
+
     void deleteAllVentesService();
+
     VenteService getVenteServiceById(Long id);
+
     List<VenteService> getAllVentesService();
 }
