@@ -13,7 +13,7 @@ public interface VenteService {
 
     Vente saveVente(Vente vente);
 
-    Vente updateVente(Vente vente);
+    Vente updateVente(Long id,Vente vente);
 
     void deleteVenteById(Long id);
 
@@ -21,19 +21,7 @@ public interface VenteService {
 
     Vente getVenteById(Long id);
 
-    Vente getVentetById(Long id);
 
-    List<Vente> getAllVentes();
+    List<Vente> getAllVente();
 
-    VenteService saveVenteService(VenteService venteservice);
-
-    VenteService updateVenteService(VenteService venteservice);
-
-    void deleteVenteServiceById(Long id);
-
-    void deleteAllVentesService();
-
-    VenteService getVenteServiceById(Long id);
-
-    List<VenteService> getAllVentesService();
 }

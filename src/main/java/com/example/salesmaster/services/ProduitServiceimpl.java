@@ -1,42 +1,33 @@
 package com.example.salesmaster.services;
 
-import com.example.salesmaster.entities.Client;
 import com.example.salesmaster.entities.Produit;
-import com.example.salesmaster.repositories.ClientRepository;
 import com.example.salesmaster.repositories.ProduitRepository;
-import com.example.salesmaster.services.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-
 @Service
-public class ProduitServiceimpl implements ProduitService {
-
-
-    private ProduitRepository produitRepository;
+public class ProduitServiceimpl implements ProduitService{
 
     @Autowired
-    public ProduitServiceimpl(ProduitRepository produitRepository) {
-        this.produitRepository = produitRepository;
-    }
-
+    private ProduitRepository produitRepository;
     @Override
     public Produit saveProduit(Produit produit) {
         return produitRepository.save(produit);
     }
 
-
     @Override
-    public Produit updateProduit(Produit produit) {
-        return produitRepository.save(produit);
+    public Produit updateProduit(Long id,Produit produit) {
+        Produit produitFound = getProduitById(id);
+        return produitRepository.save(produitFound);
     }
-
 
     @Override
     public void deleteProduitById(Long id) {
-        produitRepository.deleteById(id);   }
-
+        Produit produit=getProduitById(id);
+        produitRepository.delete(produit);
+    }
 
     @Override
     public void deleteAllProduits() {
@@ -45,20 +36,13 @@ public class ProduitServiceimpl implements ProduitService {
 
     @Override
     public Produit getProduitById(Long id) {
-        return produitRepository.findById(id).get();
+        return produitRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("produit Does not exist !"));
+
     }
-
-
     @Override
-    public List<Produit> getAllProduits() {
+    public List<Produit> getAllProduit() {
         return produitRepository.findAll();
     }
 
-    public List<Produit> getAllProduit() {
-        return null;
-    }
-
-    public Produit updateProduit(Long produitId, Produit produit) {
-        return produit;
-    }
 }

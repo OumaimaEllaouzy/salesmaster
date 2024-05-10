@@ -4,34 +4,30 @@ import com.example.salesmaster.entities.Vente;
 import com.example.salesmaster.repositories.VenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class VenteServiceimpl implements VenteService{
-    private VenteRepository venteRepository;
-
-
 
     @Autowired
-    public VenteServiceimpl(VenteRepository venteRepository) {
-        this.venteRepository = venteRepository;
-    }
+    private VenteRepository venteRepository;
     @Override
     public Vente saveVente(Vente vente) {
         return venteRepository.save(vente);
     }
 
-
     @Override
-    public Vente updateVente(Vente vente) {
-        return venteRepository.save(vente);
+    public Vente updateVente(Long id,Vente vente) {
+        Vente venteFound = getVenteById(id);
+        return venteRepository.save(venteFound);
     }
-
 
     @Override
     public void deleteVenteById(Long id) {
-        venteRepository.deleteById(id);   }
-
+        Vente vente=getVenteById(id);
+        venteRepository.delete(vente);
+    }
 
     @Override
     public void deleteAllVentes() {
@@ -40,55 +36,13 @@ public class VenteServiceimpl implements VenteService{
 
     @Override
     public Vente getVenteById(Long id) {
-        return null;
+        return venteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("vente Does not exist !"));
+
     }
-
     @Override
-    public Vente getVentetById(Long id) {
-        return venteRepository.findById(id).get();
-    }
-
-
-    @Override
-    public List<Vente> getAllVentes() {
+    public List<Vente> getAllVente() {
         return venteRepository.findAll();
     }
 
-    @Override
-    public VenteService saveVenteService(VenteService venteservice) {
-        return null;
-    }
-
-    @Override
-    public VenteService updateVenteService(VenteService venteservice) {
-        return null;
-    }
-
-    @Override
-    public void deleteVenteServiceById(Long id) {
-
-    }
-
-    @Override
-    public void deleteAllVentesService() {
-
-    }
-
-    @Override
-    public VenteService getVenteServiceById(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<VenteService> getAllVentesService() {
-        return null;
-    }
-
-    public Vente updateVente(Long venteId, Vente vente) {
-        return vente;
-    }
-
-    public List<Vente> getAllVente() {
-        return null;
-    }
 }

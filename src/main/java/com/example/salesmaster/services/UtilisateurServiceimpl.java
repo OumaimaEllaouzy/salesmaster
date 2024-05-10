@@ -4,39 +4,30 @@ import com.example.salesmaster.entities.Utilisateur;
 import com.example.salesmaster.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
-public class UtilisateurServiceimpl implements UtilisateurService {
-
-    private UtilisateurRepository utilisateurRepository;
+public class UtilisateurServiceimpl implements UtilisateurService{
 
     @Autowired
-    public UtilisateurServiceimpl(UtilisateurRepository utilisateurRepository) {
-        this.utilisateurRepository = utilisateurRepository;
-    }
-
+    private UtilisateurRepository utilisateurRepository;
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);
     }
 
-
     @Override
-    public Utilisateur updateUtilisateur(Utilisateur utilisateur) {
-        return utilisateurRepository.save(utilisateur);
+    public Utilisateur updateUtilisateur(Long id,Utilisateur utilisateur) {
+        Utilisateur utilisateurFound = getUtilisateurById(id);
+        return utilisateurRepository.save(utilisateurFound);
     }
-
 
     @Override
     public void deleteUtilisateurById(Long id) {
-        utilisateurRepository.deleteById(id);   }
-
-    @Override
-    public void deleteAllUtilisateur() {
-
+        Utilisateur utilisateur=getUtilisateurById(id);
+        UtilisateurRepository.delete(utilisateur);
     }
-
 
     @Override
     public void deleteAllUtilisateurs() {
@@ -45,26 +36,13 @@ public class UtilisateurServiceimpl implements UtilisateurService {
 
     @Override
     public Utilisateur getUtilisateurById(Long id) {
-        return null;
-    }
+        return utilisateurRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("utilisateur Does not exist !"));
 
+    }
     @Override
     public List<Utilisateur> getAllUtilisateur() {
-        return null;
-    }
-
-    @Override
-    public Utilisateur getUtilisateurtById(Long id) {
-        return utilisateurRepository.findById(id).get();
-    }
-
-
-    @Override
-    public List<Utilisateur> getAllUtilisateurs() {
         return utilisateurRepository.findAll();
     }
 
-    public Utilisateur updateUtilisateur(Long utilisateurId, Utilisateur utilisateur) {
-        return utilisateur;
-    }
 }

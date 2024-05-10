@@ -29,4 +29,5 @@ public class LigneDeVente {
     private int quantity;
     private double prixUnitaire;
 
+
 }

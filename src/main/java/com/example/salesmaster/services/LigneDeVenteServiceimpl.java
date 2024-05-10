@@ -10,12 +10,8 @@ public class LigneDeVenteServiceimpl implements LigneDeVenteService{
     private LigneDeVenteRepository ligneDeVenteRepository;
 
     @Override
-    public LigneDeVente saveLigneDeVente(return ligneDeVenteRepository.save(ligneDeVente); {
-    }
-
-    @Override
     public LigneDeVente saveLigneDeVente(LigneDeVente ligneDeVente) {
-        return null;
+        return ligneDeVente.save(ligneDeVente);
     }
 
     @Override
@@ -38,51 +34,14 @@ public class LigneDeVenteServiceimpl implements LigneDeVenteService{
 
         @Override
         public LigneDeVente getLigneDeVenteById(Long id) {
-            return null;
+            return ligneDeVenteRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("ligneDeVente Does not exist !"));
         }
 
         @Override
         public List<LigneDeVente> getAllLigneDeVente() {
             return ligneDeVenteRepository.findAll();
         }
-    }
 
-    @Override
-    public void deleteLigneDeVenteById(Long id) {
-
-    }
-
-    @Override
-    public void deleteAllLigneDeVentes() {
-
-    }
-
-    @Override
-    public LigneDeVente getLigneDeVenteById(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<LigneDeVente> getAllLigneDeVente() {
-        return null;
-    }
-
-
-}
-
-@Override
-public void deleteAllLignesDeVente() { ligneDeVenteRepository.deleteteAll();
-
-}
-
-@Override
-public LigneDeVente getLigneDeVenteById(Long id) {
-    return ligneDeVenteRepository.findById(id);
-         .orElseThrow(() -> new RuntimeException("ligneDeVente Does not exist !"))
-}
-
-public List<LigneDeVente> getAllLigneDeVente() {
-    return ligneDeVenteRepository.findAll();
-}
 
 }

@@ -8,17 +8,11 @@ import java.util.List;
 public interface UtilisateurService {
 
     Utilisateur saveUtilisateur(Utilisateur utilisateur);
-    Utilisateur updateUtilisateur(Utilisateur utilisateur);
+    Utilisateur updateUtilisateur(Long id,Utilisateur utilisateur);
     void deleteUtilisateurById(Long id);
-    void deleteAllUtilisateur();
 
     void deleteAllUtilisateurs();
 
     Utilisateur getUtilisateurById(Long id);
-
     List<Utilisateur> getAllUtilisateur();
-
-    Utilisateur getUtilisateurtById(Long id);
-
-    List<Utilisateur> getAllUtilisateurs();
 }
