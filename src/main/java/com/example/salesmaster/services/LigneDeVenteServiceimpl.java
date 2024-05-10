@@ -11,7 +11,7 @@ public class LigneDeVenteServiceimpl implements LigneDeVenteService{
 
     @Override
     public LigneDeVente saveLigneDeVente(LigneDeVente ligneDeVente) {
-        return ligneDeVente.save(ligneDeVente);
+        return ligneDeVenteRepository.save(ligneDeVente);
     }
 
     @Override

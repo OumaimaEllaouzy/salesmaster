@@ -26,7 +26,7 @@ public class UtilisateurServiceimpl implements UtilisateurService{
     @Override
     public void deleteUtilisateurById(Long id) {
         Utilisateur utilisateur=getUtilisateurById(id);
-        UtilisateurRepository.delete(utilisateur);
+        utilisateurRepository.delete(utilisateur);
     }
 
     @Override
