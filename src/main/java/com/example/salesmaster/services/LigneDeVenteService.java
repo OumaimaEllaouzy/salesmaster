@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-    public interface LigneDeVenteService {
+public interface LigneDeVenteService {
 
-        LigneDeVente saveLigneDeVente(LigneDeVente ligneDeVente);
-        LigneDeVente updateLigneDeVente(Long id,LigneDeVente ligneDeVente);
-        void deleteLigneDeVenteById(Long id);
-        void deleteAllLigneDeVentes();
+    LigneDeVente createLignedeVente(LigneDeVente lignedeVente);
 
-        LigneDeVente getLigneDeVenteById(Long id);
-        List<LigneDeVente> getAllLigneDeVente();
-    }
+    List<LigneDeVente> getAllLignedeVente();
+
+    LigneDeVente getLignedeVenteById(LigneDeVenteKey lignedeVenteId);
+
+    LigneDeVente updateLignedeVente(LigneDeVenteKey lignedeVenteId, LigneDeVente lignedeVente);
+
+    void deleteLigneDeVente(LigneDeVenteKey lignedeVenteId);
+}

@@ -29,5 +29,10 @@ public class LigneDeVente {
     private int quantity;
     private double prixUnitaire;
 
-
+    public LigneDeVente(LigneDeVenteKey id, int quantite, Double prixUnitaire) {
+        this.id = id;
+        this.quantity = quantite;
+        this.prixUnitaire = prixUnitaire;
+    }
 }
+
